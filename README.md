@@ -62,6 +62,6 @@ curie-clean/
         │   ├── duplicates_test.clj
         │   └── resolution_test.clj
         ├── core_test.clj
-        └── test_utils.clj
+        ├── test_utils.clj
         └── validation_test.clj
 ```
