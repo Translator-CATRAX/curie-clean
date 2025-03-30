@@ -54,12 +54,9 @@
   (let [expected-classes (get-classes-solution "expected_classes")
         num (-> section str Integer/parseInt dec)]
     (cond
-      (and subject object) (yaml/write-solution
-                            (append-to-nth-map yaml-map num [:subject :object] expected-classes) path)
-      (and subject (not object)) (yaml/write-solution
-                                  (append-to-nth-map yaml-map num [:subject] expected-classes) path)
-      (and (not subject) object) (yaml/write-solution
-                                  (append-to-nth-map yaml-map num [:object] expected-classes) path)
+      (and subject object) (yaml/write-solution (append-to-nth-map yaml-map num [:subject :object] expected-classes) path)
+      (and subject (not object)) (yaml/write-solution (append-to-nth-map yaml-map num [:subject] expected-classes) path)
+      (and (not subject) object) (yaml/write-solution (append-to-nth-map yaml-map num [:object] expected-classes) path)
       :else (throw (Exception. "Curie must be in subject or object")))))
 
 
@@ -67,12 +64,9 @@
   (let [classes-to-avoid (get-classes-solution "classes_to_avoid")
         num (-> section str Integer/parseInt dec)]
     (cond
-      (and subject object) (yaml/write-solution
-                            (append-to-nth-map yaml-map num [:subject :object] classes-to-avoid) path)
-      (and subject (not object)) (yaml/write-solution
-                                  (append-to-nth-map yaml-map num [:subject] classes-to-avoid) path)
-      (and (not subject) object) (yaml/write-solution
-                                  (append-to-nth-map yaml-map num [:object] classes-to-avoid) path)
+      (and subject object) (yaml/write-solution (append-to-nth-map yaml-map num [:subject :object] classes-to-avoid) path)
+      (and subject (not object)) (yaml/write-solution (append-to-nth-map yaml-map num [:subject] classes-to-avoid) path)
+      (and (not subject) object) (yaml/write-solution (append-to-nth-map yaml-map num [:object] classes-to-avoid) path)
       :else (throw (Exception. "Curie must be in subject or object")))))
 
 
@@ -80,33 +74,27 @@
   (let [expected-taxa (get-classes-solution "expected_taxa")
         num (-> section str Integer/parseInt dec)]
     (cond
-      (and subject object) (yaml/write-solution
-                            (append-to-nth-map yaml-map num [:subject :object] expected-taxa) path)
-      (and subject (not object)) (yaml/write-solution
-                                  (append-to-nth-map yaml-map num [:subject] expected-taxa) path)
-      (and (not subject) object) (yaml/write-solution
-                                  (append-to-nth-map yaml-map num [:object] expected-taxa) path)
+      (and subject object) (yaml/write-solution (append-to-nth-map yaml-map num [:subject :object] expected-taxa) path)
+      (and subject (not object)) (yaml/write-solution (append-to-nth-map yaml-map num [:subject] expected-taxa) path)
+      (and (not subject) object) (yaml/write-solution (append-to-nth-map yaml-map num [:object] expected-taxa) path)
       :else (throw (Exception. "Curie must be in subject or object")))))
 
 
 (defn- get-regex-solution []
   (println "\nEnter pattern and replacement (comma separated): ")
   (flush)
-  (let [[pattern replacement & _] (parse-vector-input (read-line))]
-    {(keyword "regex_replacements") (vec {:pattern (or pattern "")
-                                          :replacement (or replacement "")})}))
+  (let [[pattern replacement & _] (parse-vector-input (read-line))] 
+    {:regex_replacements [{:pattern (or pattern "") 
+                           :replacement (or replacement "")}]}))
 
 
 (defn- apply-regex-replacements [yaml-map path {:keys [subject object section]}]
-  (let [regex-replacements (vec (get-regex-solution))
+  (let [regex-replacements (get-regex-solution)
         num (-> section str Integer/parseInt dec)]
     (cond
-      (and subject object) (yaml/write-solution
-                            (append-to-nth-map yaml-map num [:subject :object] regex-replacements) path)
-      (and subject (not object)) (yaml/write-solution
-                                  (append-to-nth-map yaml-map num [:subject] regex-replacements) path)
-      (and (not subject) object) (yaml/write-solution
-                                  (append-to-nth-map yaml-map num [:object] regex-replacements) path)
+      (and subject object) (yaml/write-solution (append-to-nth-map yaml-map num [:subject :object] regex-replacements) path)
+      (and subject (not object)) (yaml/write-solution (append-to-nth-map yaml-map num [:subject] regex-replacements) path)
+      (and (not subject) object) (yaml/write-solution (append-to-nth-map yaml-map num [:object] regex-replacements) path)
       :else (throw (Exception. "Curie must be in subject or object")))))
 
 
