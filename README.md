@@ -1,4 +1,4 @@
-# curie-clean (1.0.0)
+# curie-clean (1.0.2)
 
 ## Skye Goetz (ISB) 03/26/2025
 
