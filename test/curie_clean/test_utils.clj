@@ -6,7 +6,9 @@
 (def ^:dynamic *test-tsv-content* 
   "id\tname\tcategory\n1\tAPOA1\tbiolink:Gene\n2\tBRCA1\tbiolink:Gene\n")
 
-(defn with-temp-tsv [f] 
+(defn with-temp-tsv 
+  "Creates a temporary TSV file and binds *test-tsv-path* to its path."
+  [f] 
   (let [temp-file (java.io.File/createTempFile "test" ".tsv")] 
     (try 
       (with-open [writer (io/writer temp-file)] 

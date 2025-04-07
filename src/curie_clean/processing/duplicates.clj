@@ -4,7 +4,9 @@
     (:gen-class))
 
 
-(defn get-duplicates [path]
+(defn get-duplicates 
+  "Returns a map of duplicates indexed by name"
+  [path]
   (let [{:keys [header data]} (tsv/separate-header path)
         col-names (rest header)
         name-pos (->> col-names
@@ -34,7 +36,9 @@
         (println (str (inc index) ": " curie " " category " " (first file)))))))
 
 
-(defn parse-input [input max-number]
+(defn parse-input 
+  "Converts a comma separated list of numbers into a set of numbers"
+  [input max-number]
   (->> (clojure.string/split input #",")
        (map clojure.string/trim)
        (map #(try (Integer/parseInt %)
@@ -57,7 +61,9 @@
            set))))
 
 
-(defn- in-subject-object? [record curie]
+(defn- in-subject-object? 
+  "Returns a map of columns to true if the curie is in the subject or object"
+  [record curie]
   (cond-> {}
     (= curie (:subject record)) (assoc :subject true)
     (= curie (:object record))  (assoc :object true)))

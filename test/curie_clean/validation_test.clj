@@ -6,7 +6,7 @@
 
 (use-fixtures :each with-temp-tsv)
 
-(deftest tsv-validation-test
+(deftest tsv-validation-test 
   (let [validator-fn (tsv-validator "Test TSV")]
     (testing "Valid TSV file"
       (is (true? (validator-fn *test-tsv-path*))))

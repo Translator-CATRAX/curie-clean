@@ -6,7 +6,9 @@
 (import [org.apache.commons.csv CSVParser CSVFormat])
 
 
-(defn read-tsv [path]
+(defn read-tsv 
+  "Reads a TSV file into a vector of vectors with Clojure CSV."
+  [path]
   (with-open [reader (io/reader path)]
     (->> (line-seq reader)
          (pmap #(first (csv/read-csv (java.io.StringReader. %)
@@ -23,7 +25,9 @@
     {:header header :data data}))
 
 
-(defn read-large-tsv [path]
+(defn read-large-tsv 
+  "Reads a large TSV file into a vector of maps with Commons CSV."
+  [path]
   (with-open [reader (io/reader path)
               parser (CSVParser/parse reader
                                       (-> CSVFormat/TDF 

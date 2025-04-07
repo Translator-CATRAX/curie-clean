@@ -20,7 +20,9 @@
   (empty? (line-seq (io/reader path))))
 
 
-(defn is-valid-tsv? [path file-type]
+(defn is-valid-tsv? 
+  "Checks if the given path is a valid TSV file."
+  [path file-type]
   (cond
     (not (is-file? path)) (format "%s file does not exist" file-type)
     (not (is-tsv? path)) (format "%s file is not a TSV" file-type)

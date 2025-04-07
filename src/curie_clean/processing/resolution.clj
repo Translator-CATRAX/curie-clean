@@ -35,7 +35,9 @@
     {(keyword mode) (parse-vector-input input)}))
 
 
-(defn- append-to-nth-map [yaml-map section columns fix]
+(defn- append-to-nth-map 
+  "Updates the nth map in a vector of maps"
+  [yaml-map section columns fix]
   (reduce (fn [updated-yaml column]
             (update-in updated-yaml [section column]
                        (fn [existing-map]
